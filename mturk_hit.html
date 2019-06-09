@@ -1,0 +1,206 @@
+<meta content="width=device-width,initial-scale=1" name="viewport" />
+<meta charset="UTF-8">
+
+<section class="container" id="Categorization">
+
+<!-- passthrough variables included here to avoid warnings from amazon:
+	 ${batch} ${idx} ${holdout} ${ccfn} ${ccsampnum} ${station} ${airdate} -->
+
+<!-- Instructions (collapsible) -->
+<div class="row">
+<div class="col-xs-12 col-md-12">
+<div class="panel panel-primary">
+	<div id="collapseTrigger" class="panel-heading">News Categorization Instructions - <span class="familiarize blink-initial">please read <em>this</em> first</span><div class="panel-icon"><span>&nbsp;</span></div><span class="collapse-text">&nbsp;</span></div>
+	<div class="panel-body" id="instructionBody" style="display: none;">
+		<p><strong>Pick the category that best fits the <em>primary</em> theme in the provided text</strong> (or the theme of the middle segment if it's unclear which theme predominates). <strong>If the primary theme could fit into more than one category, choose <em>the first that fits, from top to bottom</em></strong> (many times the best answer is towards the bottom). For example, the awarding of a Nobel prize in Physics might fit into <em>Science</em> or <em>Current Events</em>, but since the Science category comes first, that is the correct category.</p>
+		<p>The <strong>&gt;</strong> symbol means a new person is speaking (and it may be much later or on an unrelated topic); without a <strong>&gt;</strong>, assume the same person is continuing. All text comes from closed captioning (CC) for U.S. television and radio news since 2010. It may have frequent errors in spelling (you can often sound it out), omissions, gaps, etc. Just do your best to categorize what you get; sometimes the right answer is debatable. You can use the comment field if you feel there is something we should know about.</p>
+		<p><strong>The categories and their descriptions are below</strong>; you can also see the descriptions by hovering your mouse over the buttons. Depending on your answer, you may be asked to choose one or more supplemental categories. These are not meant to reflect your views on or knowledge of the news being discussed, but rather simply what is presented.</p>
+
+		<!-- Detailed category descriptions -->
+		<table class="table table-condensed table-striped table-responsive">
+			<colgroup>
+				<col class="col-xs-4 col-md-4" />
+				<col class="col-xs-8 col-md-8" />
+			</colgroup>
+			<tbody id='CategoryTable'>
+				<tr>
+					<th>News Category</th>
+					<th>Description</th>
+				</tr>
+				<!-- categories are populated here -->
+			 </tbody>
+		</table>
+		<p>The supplemental categories and their descriptions: </p>
+		<div id='SupplTable'>
+			<!-- supplemental categories are populated here -->
+		</div>
+	</div>
+</div>
+</div>
+</div>
+<!-- End instructions -->
+
+<!-- Categorization Layout -->
+<div class="row" id="workContent">
+<div class="col-xs-12 col-sm-8 content">
+	<div class="well">
+		<!-- content to classify -->
+		<p class="cc_text">${priorsample}</p>
+		<p class="cc_text">${sample}</p>
+		<p class="cc_text">${nextsample}</p>
+	</div>
+</div>
+
+<div class="col-xs-12 col-sm-4 fields">
+<div id="CategoryGroup" class="form-group">
+	<label class="group-label">Pick the <em>1<sup>st</sup></em> category matching the <em>primary</em> theme:</label>
+
+	<div id="CategoryInputs" class="btn-group-vertical" data-toggle="buttons">
+		<!-- button labels are populated here -->
+
+	</div>
+</div>
+<!-- supplemental questions are populated here -->
+<div class="form-group input-group-sm">
+	<input type="text" id="commentInput" class="form-control" name="comment" value="" placeholder="provide (optional) comments here" />
+</div>
+</div>
+</div>
+</section>
+
+<!-- CSS -->
+<link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" rel="stylesheet" />
+<link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" rel="stylesheet" />
+<link crossorigin="anonymous" href="https://fonts.googleapis.com/css?family=Cinzel" rel="stylesheet" />
+
+<style type="text/css">
+#collapseTrigger{
+	color:#fff;
+	display: block;
+	text-decoration: none;
+	font-size: 115%;
+	font-weight: bold;
+	cursor: pointer;
+}
+#collapseTrigger span.collapse-text:before{
+	font-size: 95%;
+	margin-left: 2em;
+	/*float: right;*/
+	content: "(Click to read)";
+}
+#collapseTrigger.expanded span.collapse-text:before{
+	content: "(Click to hide)";
+}
+#collapseTrigger .familiarize{
+	text-decoration: underline;
+	color: tomato;
+	font-size: 95%;
+	font-weight: normal;
+}
+#submitButton{
+	white-space: normal;
+}
+#instructionBody {
+	font-size: 13px;
+}
+#instructionBody table{
+	font-size: 12px;
+}
+#SupplTable table{
+	margin-bottom: 15px;
+}
+#SupplTable table:last-of-type{
+	margin-bottom: 5px;
+}
+#CategoryInputs{
+	display: block;
+/*	margin-top: 10px; */
+}
+.content{
+	margin-bottom: 15px;
+}
+.group-label{
+	font-size: 12px;
+}
+.form-group{
+	margin-bottom: 10px;
+}
+.btns-autosized{
+	table-layout: auto;
+}
+.cc_text {
+	font-family: 'Cinzel', 'Times New Roman', Times, Georgia, serif;
+	font-size: 125%;
+}
+mark {
+	background: #f4ff80;
+}
+#workContent{
+	font-size: 90%;
+}
+#collapseTrigger div.panel-icon{
+	width: 25px;
+	height: 25px;
+	background-color: white;
+	color: #337ab7;
+	float: right;
+	border: 1px solid #aac;
+	position: relative;
+}
+#collapseTrigger div.panel-icon>span{
+	margin-left: 5px;
+}
+#collapseTrigger div.panel-icon>span:after{
+	line-height: 23px;
+	vertical-align: middle;
+	content: "∨";
+	/*content: "v"; */
+	-webkit-transform: rotate(0deg) translate(-50%, -50%) translate(0px, -2px);
+	-moz-transform: rotate(0deg) translate(-50%, -50%) translate(0px, -2px);
+	-ms-transform: rotate(0deg) translate(-50%, -50%) translate(0px, -2px);
+	transform: rotate(0deg) translate(-50%, -50%) translate(0px, -2px);
+	transition: transform 100ms ease-in;
+	position: absolute;
+	font-size: 19px;
+	font-weight: bolder;
+	text-shadow: 0px 0px 4px #ccf, 0px 0px 1px #337ab7;
+	float: left;
+	top: 50%;
+	left: 50%;
+}
+#collapseTrigger.expanded div.panel-icon>span:after{
+	-webkit-transform: translate(-50%,-50%) rotate(180deg);
+	-ms-transform: translate(-50%,-50%) rotate(180deg);
+	-moz-transform: translate(-50%,-50%) rotate(180deg);
+	transform: translate(-50%,-50%) rotate(180deg);
+	transition: transform 100ms ease-in;
+}
+.blink-initial{
+	-webkit-animation:1.25s blinker linear 5;
+	-moz-animation:1.25s blinker linear 5;
+	animation:1.25s blinker linear 5;
+}
+@-moz-keyframes blinker{
+	30% { opacity: 1.0; }
+	40% { opacity: 0.0; }
+	60% { opacity: 0.0; }
+	70% { opacity: 1.0; }
+}
+@-webkit-keyframes blinker{
+	30% { opacity: 1.0; }
+	40% { opacity: 0.0; }
+	60% { opacity: 0.0; }
+	70% { opacity: 1.0; }
+}
+@keyframes blinker{
+	30% { opacity: 1.0; }
+	40% { opacity: 0.0; }
+	60% { opacity: 0.0; }
+	70% { opacity: 1.0; }
+}
+</style>
+
+<!-- Javascript -->
+<script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://s3.amazonaws.com/mturk-news/mturk_hit_04.js" integrity="sha384-xGR1D0xDNokkq2Jab/pK/MEYJQYMbBJ0Ow2M/MzdF1nkEsfZcj/iK6mytAa09cvB" crossorigin="anonymous"></script><!-- calc with: openssl dgst -sha384 -binary file.js | openssl base64 -A -->
